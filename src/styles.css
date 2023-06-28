@@ -1,1 +1,57 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+:root {
+  --primary-color: #026467;
+  --secondary-color: #e5f5ea;
+  --body-text-color: #596392;
+  --navbar-footer-color: #f9f9f9;
+}
+
+body {
+  font-family: Roboto, sans-serif;
+  font-size: 12px;
+  color: var(--body-text-color);
+}
+
+.bg-primary {
+  background: var(--primary-color);
+}
+
+.bg-secondary {
+  background: var(--secondary-color);
+}
+
+.bg-body-text {
+  background: var(--body-text-color);
+}
+
+.bg-nav-footer {
+  background: var(--navbar-footer-color);
+}
+
+.text-primary {
+  color: var(--primary-color);
+}
+
+.text-secondary {
+  color: var(--secondary-color);
+}
+
+.text-body-text {
+  color: var(--body-text-color);
+}
+
+.text-nav-footer {
+  color: var(--navbar-footer-color);
+}
+
+.app-body{
+  min-height: 85vh;
+}
+
+.h-120 {
+  max-height: 700px;
+}
