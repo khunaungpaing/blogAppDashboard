@@ -3,6 +3,7 @@
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+
 :root {
   --primary-color: #026467;
   --secondary-color: #e5f5ea;
@@ -48,10 +49,39 @@ body {
   color: var(--navbar-footer-color);
 }
 
-.app-body{
+.app-body {
   min-height: 85vh;
 }
 
 .h-120 {
   max-height: 700px;
+}
+
+.g-2fr-1fr {
+  grid-template-columns: 2fr 1fr;
+}
+
+input[type="file"] {
+  height: 48px;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+  height: 48px;
+  border: none;
+
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+angular-editor-toolbar button i {
+  font-family: FontAwesome, serif !important;
+  color: #474d6d !important;
+
 }

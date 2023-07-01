@@ -1,5 +1,5 @@
 <main>
-  <section class="container max-w-full h-72 p-10 flex flex-col gap-5 justify-center">
+  <section class="container max-w-full mt-32 h-44 p-10 flex flex-col gap-5 justify-center">
     <div class="flex flex-col gap-3 justify-center items-center">
       <span class="uppercase mr-5 text-3xl font-bold">New Categories</span>
       <span class="text-center lg:px-64 sm:px-10">
@@ -9,7 +9,8 @@
     <form class="form flex gap-5 justify-center lg:px-72 sm:px-32"
           [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
       <div class="form-group flex flex-col min-w-full">
-        <input class="form-control border border-gray-300 text-gray-900 text-sm !outline-none rounded focus:ring-emerald-500 focus:border-emerald-400 focus:border-2 min-w-full h-12 p-3"
+        <input
+          class="form-control border border-gray-300 text-gray-900 text-sm !outline-none rounded focus:ring-emerald-500 focus:border-emerald-400 focus:border-2 min-w-full h-12 p-3"
                placeholder="Add New Category"
                required type="text"
                formControlName="category">
@@ -20,13 +21,54 @@
           </svg>
           <span class="sr-only">Info</span>
           <div>
-            <span class="font-medium">Danger alert!</span> Change a few things up and try submitting again.
+            <span class="font-medium">Please Fill something</span>
           </div>
         </div>
 
       </div>
-      <button class="h-12 min-w-fit px-6 text-xl rounded bg-primary text-white" type="submit" [disabled]="categoryForm.invalid">Add Category</button>
+      <button [disabled]="categoryForm.invalid" class="h-12 min-w-fit px-6 text-xl rounded bg-primary text-white"
+              type="submit">Add Category
+      </button>
     </form>
 
   </section>
+
+
+  <section class="relative overflow-x-auto lg:px-44 sm:px10 py-11 -z-10">
+    <table class="w-full text-sm text-left text-gray-500">
+      <thead class="text-xs text-gray-700 uppercase bg-secondary">
+      <tr>
+        <th class="px-6 py-3" scope="col">
+          <div class="flex items-center">
+            No
+          </div>
+        </th>
+        <th class="px-6 py-3" scope="col">
+          <div class="flex items-center">
+            Category Name
+          </div>
+        </th>
+        <th class="px-6 py-3" scope="col">
+          <span>Actions</span>
+        </th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let c of categoryArray; let i = index;">
+      <tr class="bg-white border-b">
+        <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+          {{ i + 1 }}
+        </th>
+        <th class="px-6 py-4" scope="row">
+          {{ c.data.category }}
+        </th>
+        <td class="px-6 py-4">
+          <button (click)="onEdit(c)" class="font-medium text-blue-600 hover:underline">Edit</button>
+          <button (click)="onDelete(c.id)" class="ml-5 font-medium text-red-600 hover:underline">Delete</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+
+
 </main>

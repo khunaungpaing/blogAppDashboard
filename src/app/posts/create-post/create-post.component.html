@@ -1,0 +1,188 @@
+<main>
+  <div class="flex flex-col gap-3 justify-center items-center pt-10">
+    <span class="uppercase mr-5 text-3xl font-bold">Create New Post</span>
+    <span class="text-center lg:px-64 sm:px-10">
+          You can add new post from here ...
+      </span>
+  </div>
+  <form (ngSubmit)="onSubmit()" [formGroup]="postForm"
+        class="flex flex-col px-20 py-10 min-w-full gap-5">
+    <section class="grid grid-cols-2 g-2fr-1fr gap-5">
+      <div class="f flex flex-col gap-3 shadow p-10 border-emerald-200 border rounded w-full">
+        <div class="w-full">
+          <label class="block mb-2 text-sm font-medium text-gray-900 ">Title</label>
+          <input
+            class="block border border-gray-300 text-gray-900 text-sm !outline-none bg-gray-50 rounded-lg focus:ring-emerald-500 focus:border-emerald-400 focus:border-2 w-full h-12 p-3"
+            formControlName="title"
+            required type="text">
+          <div *ngIf="fc['title'].errors?.['required']&&fc['title'].touched" class="flex text-sm text-red-500"
+               role="alert">
+            <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path clip-rule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                    fill-rule="evenodd"></path>
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+              <span class="font-medium">Title is required</span>
+            </div>
+          </div>
+          <div *ngIf="fc['title'].errors?.['minlength']&&fc['title'].touched" class="flex text-sm text-red-500"
+               role="alert">
+            <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path clip-rule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                    fill-rule="evenodd"></path>
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+              <span class="font-medium">Title required at least 10 more characters...</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <label class="block mb-2 text-sm font-medium text-gray-900 ">Permalink</label>
+          <input
+            class="block border border-gray-300 text-gray-900 text-sm !outline-none bg-gray-50 rounded-lg focus:ring-emerald-500 focus:border-emerald-400 focus:border-2 w-full h-12 p-3"
+            formControlName="permalink"
+            required type="text">
+          <div *ngIf="fc['permalink'].errors?.['required']&&fc['permalink'].touched" class="flex text-sm text-red-500"
+               role="alert">
+            <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path clip-rule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                    fill-rule="evenodd"></path>
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+              <span class="font-medium">Permalink is required</span>
+            </div>
+          </div>
+
+        </div>
+        <div>
+          <label class="block mb-2 text-sm font-medium text-gray-900">Excerpt</label>
+          <textarea
+            class="block p-2.5 w-full text-sm text-gray-900 !outline-none bg-gray-50 rounded-lg border border-gray-300 focus:ring-emerald-500 focus:border-emerald-400 focus:border-2"
+            formControlName="excerpt"
+            placeholder="Write your thoughts here..."
+            rows="10"></textarea>
+          <div *ngIf="fc['excerpt'].errors?.['required']&&fc['excerpt'].touched" class="flex text-sm text-red-500"
+               role="alert">
+            <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path clip-rule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                    fill-rule="evenodd"></path>
+            </svg>
+            <div>
+              <span class="font-medium">Excerpt is required</span>
+            </div>
+          </div>
+          <div *ngIf="fc['excerpt'].errors?.['minlength']&&fc['excerpt'].touched" class="flex text-sm text-red-500"
+               role="alert">
+            <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path clip-rule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                    fill-rule="evenodd"></path>
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+              <span class="font-medium">Title required at least 50 more characters...</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="flex flex-col gap-3 shadow p-10 border-emerald-200 border rounded w-full h-fit">
+
+
+        <label class="block text-sm font-medium text-gray-900">Category</label>
+        <select
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+          formControlName="category">
+          <option selected>Choose Category</option>
+          <option *ngFor="let c of categories" value="{{  c.id }}-{{ c.data.category }}">{{ c.data.category }}</option>
+        </select>
+        <div *ngIf="fc['category'].errors?.['required']&&fc['category'].touched" class="flex text-sm text-red-500"
+             role="alert">
+          <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20"
+               xmlns="http://www.w3.org/2000/svg">
+            <path clip-rule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                  fill-rule="evenodd"></path>
+          </svg>
+          <span class="sr-only">Info</span>
+          <div>
+            <span class="font-medium">Please select a Post Category</span>
+          </div>
+        </div>
+
+        <label class="block mb-2 text-sm font-medium text-gray-900 ">Post Image</label>
+        <div *ngIf="img_url==''; else iBlock">
+          <div class="max-w-sm p-4 border border-gray-200 rounded shadow md:p-6">
+            <div class="flex items-center justify-center h-48 mb-4 bg-gray-300 rounded">
+              <svg aria-hidden="true" class="w-12 h-12 text-gray-200"
+                   fill="currentColor" viewBox="0 0 640 512" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <ng-template #iBlock>
+          <img [src]="img_url" alt="img" class="object-cover h-56 min-w-sm">
+        </ng-template>
+
+        <input
+          (change)="showPreview($event)"
+          accept="image/*"
+          aria-label="Browse" class="block w-full min-h-fit text-sm text-gray-900 border border-gray-300 rounded-xl cursor-pointer bg-gray-50 focus:!outline-none" formControlName="postImg" type="file">
+        <div *ngIf="fc['postImg'].errors?.['required']&&fc['postImg'].touched" class="flex text-sm text-red-500"
+             role="alert">
+          <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20"
+               xmlns="http://www.w3.org/2000/svg">
+            <path clip-rule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                  fill-rule="evenodd"></path>
+          </svg>
+          <span class="sr-only">Info</span>
+          <div>
+            <span class="font-medium">Post Image is required...</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <section>
+      <angular-editor formControlName="content"></angular-editor>
+      <div *ngIf="fc['content'].errors?.['required']&&fc['content'].touched" class="flex text-sm text-red-500"
+           role="alert">
+        <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20"
+             xmlns="http://www.w3.org/2000/svg">
+          <path clip-rule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                fill-rule="evenodd"></path>
+        </svg>
+        <span class="sr-only">Info</span>
+        <div>
+          <span class="font-medium">Content is required...</span>
+        </div>
+      </div>
+      <div class="flex gap-5 justify-end mt-5">
+        <button class="h-12 min-w-fit px-6 text-xl rounded bg-white text-red-600 hover:bg-red-200" type="button">
+          Cancel
+        </button>
+        <button [disabled]="postForm.invalid" class="h-12 min-w-fit px-6 text-xl rounded bg-primary text-white"
+                type="submit">Save Post
+        </button>
+      </div>
+
+    </section>
+  </form>
+
+</main>

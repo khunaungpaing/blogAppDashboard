@@ -1,9 +1,14 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {CategroiesComponent} from "./categroies/categroies.component";
+import {AllPostsComponent} from "./posts/all-posts/all-posts.component";
+import {CreatePostComponent} from "./posts/create-post/create-post.component";
+
 const routes: Routes = [
-  {path: '', component: CategroiesComponent},
+  {path: '', redirectTo: '/post', pathMatch: "full"},
   {path: 'category', component: CategroiesComponent},
+  {path: 'post', component: AllPostsComponent},
+  {path: 'post/new', component: CreatePostComponent},
 ];
 
 @NgModule({
