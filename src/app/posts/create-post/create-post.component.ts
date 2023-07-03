@@ -3,6 +3,7 @@ import {CategoriesService} from "../../services/categories.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Post} from "../../models/post";
 import {PostService} from "../../services/post.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-create-post',
@@ -12,19 +13,32 @@ import {PostService} from "../../services/post.service";
 export class CreatePostComponent implements OnInit {
   img_url: any = '';
   categories!: Array<any>;
-  postForm: FormGroup;
+  postForm!: FormGroup;
   selectedImage: any;
+  post: any;
+  formStatus: string = 'Add New';
+  docId: any;
 
   constructor(private categoryService: CategoriesService,
               private fb: FormBuilder,
-              private postService: PostService) {
-    this.postForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(10)]],
-      permalink: ['', [Validators.required]],
-      excerpt: ['', [Validators.required, Validators.minLength(50)]],
-      category: ['', [Validators.required]],
-      postImg: ['', [Validators.required]],
-      content: ['', [Validators.required]]
+              private postService: PostService,
+              private route: ActivatedRoute) {
+
+    this.route.queryParams.subscribe(val => {
+      this.docId = val['id']
+      if (this.docId) {
+        this.postService.findById(this.docId).subscribe(post => {
+          this.post = post;
+          console.log(this.post);
+          this.postForm.controls['title'].setValue(this.post.title);
+          this.postForm.controls['permalink'].setValue(this.post.permalink);
+          this.postForm.controls['excerpt'].setValue(this.post.excerpt);
+          this.postForm.controls['category'].setValue(`${this.post.category.categoryId}-${this.post.category.category}`);
+          this.postForm.controls['content'].setValue(this.post.content);
+          this.img_url = this.post.postImgPath;
+          this.formStatus = 'Edit';
+        })
+      }
     })
   }
 
@@ -36,6 +50,17 @@ export class CreatePostComponent implements OnInit {
     this.categoryService.loadData().subscribe(value => {
       this.categories = value;
     });
+
+    this
+      .postForm = this.fb.group({
+      title: ['', [Validators.required, Validators.minLength(10)]],
+      permalink: ['', [Validators.required]],
+      excerpt: ['', [Validators.required, Validators.minLength(50)]],
+      category: ['', [Validators.required]],
+      postImg: ['', [Validators.required]],
+      content: ['', [Validators.required]]
+    });
+
   }
 
   showPreview(event: any) {
@@ -67,7 +92,7 @@ export class CreatePostComponent implements OnInit {
       status: 'new',
       createdAt: new Date()
     }
-    this.postService.uploadPost(this.selectedImage, postData);
+    this.postService.uploadPost(this.selectedImage, postData, this.formStatus, this.docId);
     this.postForm.reset();
     this.img_url = '';
   }

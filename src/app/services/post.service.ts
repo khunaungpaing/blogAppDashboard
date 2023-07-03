@@ -18,14 +18,16 @@ export class PostService {
               private router: Router) {
   }
 
-  uploadPost(selectedImage: any, postData: Post) {
+  uploadPost(selectedImage: any, postData: Post, formStatus: string, id?: any) {
     const filepath = `postIMG/${Date.now()}`;
     console.log(filepath);
     this.storage.upload(filepath, selectedImage).then(() => {
       console.log('post image uploaded successful')
       this.storage.ref(filepath).getDownloadURL().subscribe(URL => {
         postData.postImgPath = URL;
-        this.saveData(postData);
+        formStatus == 'Edit' ?
+          this.update(id, postData) :
+          this.saveData(postData);
       })
     })
   }
@@ -42,11 +44,37 @@ export class PostService {
     );
   }
 
+  findById(id: any) {
+    return this.afs.doc(`${this._collectionName}/${id}`).valueChanges();
+  }
+
+  update(id: any, postData: any) {
+    this.afs.doc(`${this._collectionName}/${id}`).update(postData).then(() => {
+      this.toastr.success('Data updated successfully...');
+      this.router.navigate(['/post']).then(() => {
+      });
+    })
+  }
+
+  deleteImg(postImgPath: any, id: any) {
+    this.storage.storage.refFromURL(postImgPath).delete().then(() => {
+      this.deleteData(id);
+    })
+  }
+
+  deleteData(id: any) {
+    this.afs.doc(`${this._collectionName}/${id}`).delete().then(() => {
+      this.toastr.warning('Data Deleted...')
+    })
+  }
+
   private saveData(postData: Post) {
     this.afs.collection(this._collectionName).add(postData).then(docRef => {
         this.toastr.success('Post status Success...');
-        this.router.navigate(['/post']);
+        this.router.navigate(['/post']).then(() => {
+        });
       }
     );
   }
+
 }

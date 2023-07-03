@@ -9,7 +9,7 @@
       </a>
     </div>
 
-    <section class="relative overflow-x-auto lg:px-32 sm:px-10 pb-8 pt-3 -z-10">
+    <div class="relative overflow-x-auto lg:px-32 sm:px-10 pb-8 pt-3">
       <table class="w-full text-sm text-left text-gray-500">
         <thead class="text-xs text-gray-700 uppercase bg-secondary">
         <tr>
@@ -87,13 +87,16 @@
             <button
               class="font-medium text-blue-600 hover:underline"
               routerLink="/post/new"
+              [queryParams]="{id: post.id}"
               type="button">Edit
             </button>
-            <button (click)="onDelete()" class="ml-5 font-medium text-red-600 hover:underline">Delete</button>
+            <button (click)="onDelete(post.data.postImgPath,post.id)"
+                    class="ml-5 font-medium text-red-600 hover:underline">Delete
+            </button>
           </td>
         </tr>
         </tbody>
       </table>
-    </section>
+    </div>
   </section>
 </main>

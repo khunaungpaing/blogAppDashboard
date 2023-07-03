@@ -20,11 +20,8 @@ export class AllPostsComponent implements OnInit {
     })
   }
 
-  onEdit() {
 
-  }
-
-  onDelete() {
-
+  onDelete(postImgPath: any, id: any) {
+    this.postService.deleteImg(postImgPath, id);
   }
 }

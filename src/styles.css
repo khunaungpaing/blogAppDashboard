@@ -85,3 +85,7 @@ angular-editor-toolbar button i {
   color: #474d6d !important;
 
 }
+
+.z-1 {
+  z-index: 1;
+}
