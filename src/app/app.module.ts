@@ -8,7 +8,6 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {HeaderComponent} from './layouts/header/header.component';
 import {FooterComponent} from './layouts/footer/footer.component';
-import {DashboardComponent} from './dashboard/dashboard.component';
 import {CategroiesComponent} from './categroies/categroies.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
@@ -19,16 +18,20 @@ import {CreatePostComponent} from './posts/create-post/create-post.component';
 import {AngularEditorModule} from "@kolkov/angular-editor";
 import {HttpClientModule} from "@angular/common/http";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+import {LoginComponent} from './auth/login/login.component';
+import {AngularFireAuthModule} from "@angular/fire/compat/auth";
+import {SubscriberComponent} from './layouts/subscriber/subscriber.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    DashboardComponent,
     CategroiesComponent,
     AllPostsComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    LoginComponent,
+    SubscriberComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,8 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     AngularEditorModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireAuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

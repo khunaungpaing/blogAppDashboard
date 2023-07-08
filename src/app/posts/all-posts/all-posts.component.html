@@ -1,15 +1,14 @@
-<main>
-  <section>
-    <div class="flex gap-3 justify-end items-center lg:px-32 sm:px-10">
-      <a class="flex gap-2 px-4 py-1.5 justify-center items-center bg-white text-red-600 border-red-600 border text-lg rounded
-      font-bold hover:bg-red-600 hover:text-white"
-         href="post/new">
-        <p class="text-xl">+</p>
-        <p>Add New Post</p>
-      </a>
-    </div>
+<section>
+  <div class="flex gap-3 justify-end items-center lg:px-32 sm:px-10">
+    <button class="flex gap-2 px-4 py-1.5 justify-center items-center bg-white text-red-600  text-base rounded
+      hover:bg-red-600 hover:text-white"
+            routerLink="/post/new">
+      <p class="text-xl">+</p>
+      <p>Add New Post</p>
+    </button>
+  </div>
 
-    <div class="relative overflow-x-auto lg:px-32 sm:px-10 pb-8 pt-3">
+  <div class="relative overflow-x-auto lg:px-32 sm:px-10 pb-8 pt-3">
       <table class="w-full text-sm text-left text-gray-500">
         <thead class="text-xs text-gray-700 uppercase bg-secondary">
         <tr>
@@ -26,11 +25,6 @@
           <th class="px-6 py-3" scope="col">
             <div class="w-32">
               Title
-            </div>
-          </th>
-          <th class="px-6 py-3" scope="col">
-            <div class="w-44">
-              Excerpt
             </div>
           </th>
           <th class="px-6 py-3" scope="col">
@@ -73,11 +67,6 @@
 
           </th>
           <td class="px-6 py-4">
-            <div class="w-44">
-              <p> {{ post.data.excerpt }}</p>
-            </div>
-          </td>
-          <td class="px-6 py-4">
             <p>{{ post.data.category.category }}</p>
           </td>
           <td class="px-6 py-4">
@@ -93,10 +82,20 @@
             <button (click)="onDelete(post.data.postImgPath,post.id)"
                     class="ml-5 font-medium text-red-600 hover:underline">Delete
             </button>
+
+            <button (click)="feature(post.id, !post.data.isFeatured)"
+                    *ngIf="!post.data.isFeatured; else removeFeaturedbtn"
+                    class="px-4 py-2 ml-5 font-medium text-white bg-green-400 rounded hover:bg-green-500">Mark Featured
+            </button>
+            <ng-template #removeFeaturedbtn>
+              <button
+                (click)="feature(post.id,!post.data.isFeatured)"
+                class="px-4 py-2 ml-5 font-medium text-white bg-red-400 rounded hover:bg-red-500">Remove Featured
+              </button>
+            </ng-template>
           </td>
         </tr>
         </tbody>
       </table>
     </div>
   </section>
-</main>

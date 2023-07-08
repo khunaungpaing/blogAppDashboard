@@ -1,0 +1,66 @@
+<section>
+  <div class="flex gap-3 justify-end items-center lg:px-32 sm:px-10">
+    <button class="flex gap-2 px-4 py-1.5 justify-center items-center bg-white text-red-600  text-base rounded
+      hover:bg-red-600 hover:text-white"
+            routerLink="/post/new">
+      <p class="text-xl">+</p>
+      <p>Add New Post</p>
+    </button>
+  </div>
+
+  <div class="relative overflow-x-auto lg:px-32 sm:px-10 pb-8 pt-3">
+    <table class="w-full text-sm text-left text-gray-500">
+      <thead class="text-xs text-gray-700 uppercase bg-secondary">
+      <tr>
+        <th class="px-6 py-3 " scope="col">
+          <div class="w-2">
+            No
+          </div>
+        </th>
+        <th class="px-6 py-3" scope="col">
+          <div class="w-52">
+            Name
+          </div>
+        </th>
+        <th class="px-6 py-3" scope="col">
+          <div class="w-32">
+            Email
+          </div>
+        </th>
+        <th class="px-6 py-3" scope="col">
+          <div class="flex items-center">
+            Action
+          </div>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let sub of subArrays; let i = index;"
+          class="bg-white border-b">
+        <td class="px-6 py-4">
+          <div class="w-2">
+            <p>{{i + 1}}</p>
+          </div>
+
+        </td>
+        <td class="px-6 py-4">
+          <div class="w-52">
+            {{sub?.data?.['name']}}
+          </div>
+
+        </td>
+        <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap" scope="row">
+          <div class="w-32">
+            <p>{{sub?.data?.['email']}}</p>
+          </div>
+        </th>
+        <td class="px-6 py-4">
+          <button (click)="onDelete(sub?.id)"
+                  class="ml-5 font-medium text-red-600 hover:underline">Delete
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

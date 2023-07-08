@@ -1,6 +1,9 @@
-<app-header></app-header>
-<app-dashboard></app-dashboard>
+<div *ngIf="authStatus()">
+  <app-header></app-header>
+</div>
 <div class="mt-28">
   <router-outlet></router-outlet>
 </div>
-<app-footer></app-footer>
+<div *ngIf="authStatus()">
+  <app-footer></app-footer>
+</div>
