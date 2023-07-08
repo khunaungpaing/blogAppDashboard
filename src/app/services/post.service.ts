@@ -20,14 +20,14 @@ export class PostService {
 
   uploadPost(selectedImage: any, postData: Post, formStatus: string, id?: any) {
     const filepath = `postIMG/${Date.now()}`;
-    console.log(filepath);
     this.storage.upload(filepath, selectedImage).then(() => {
-      console.log('post image uploaded successful')
       this.storage.ref(filepath).getDownloadURL().subscribe(URL => {
         postData.postImgPath = URL;
         formStatus == 'Edit' ?
           this.update(id, postData) :
           this.saveData(postData);
+        this.router.navigate(['/post']).then(() => {
+        });
       })
     })
   }
@@ -51,8 +51,6 @@ export class PostService {
   update(id: any, postData: any) {
     this.afs.doc(`${this._collectionName}/${id}`).update(postData).then(() => {
       this.toastr.success('Data updated successfully...');
-      this.router.navigate(['/post']).then(() => {
-      });
     })
   }
 
@@ -71,8 +69,6 @@ export class PostService {
   private saveData(postData: Post) {
     this.afs.collection(this._collectionName).add(postData).then(docRef => {
         this.toastr.success('Post status Success...');
-        this.router.navigate(['/post']).then(() => {
-        });
       }
     );
   }

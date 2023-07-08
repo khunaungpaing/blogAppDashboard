@@ -19,7 +19,7 @@
     </div>
 
     <div *ngIf="AuthStatus()" class="flex-2 flex gap-3 items-center">
-      <span>{{userEmail}} </span>
+      <span>{{userEmail()}} </span>
       <button (click)="logout()"
               class=" min-w-fit px-6 py-2 text-base rounded text-red-600 hover:underline hover:underline-offset-8 "
               type="submit">

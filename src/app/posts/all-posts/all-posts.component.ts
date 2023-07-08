@@ -9,14 +9,15 @@ import {PostService} from "../../services/post.service";
 export class AllPostsComponent implements OnInit {
 
   postArray!: Array<any>;
+  isEmpty: boolean = true;
 
   constructor(private postService: PostService) {
   }
 
   ngOnInit(): void {
     this.postService.loadData().subscribe(val => {
-      console.log(val);
       this.postArray = val;
+      this.isEmpty = val.length == 0;
     })
   }
 
@@ -26,9 +27,10 @@ export class AllPostsComponent implements OnInit {
   }
 
   feature(id: any, value: boolean) {
-    const feacturedData = {
+    const featuredData = {
       isFeatured: value
     }
-    this.postService.markFeatured(id, feacturedData);
+    this.postService.markFeatured(id, featuredData);
   }
+
 }

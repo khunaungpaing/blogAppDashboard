@@ -12,6 +12,7 @@
         <div class="w-full">
           <label class="block mb-2 text-sm font-medium text-gray-900 ">Title</label>
           <input
+            (keyup)="onKeyChange($event)"
             class="block border border-gray-300 text-gray-900 text-sm !outline-none bg-gray-50 rounded-lg focus:ring-emerald-500 focus:border-emerald-400 focus:border-2 w-full h-12 p-3"
             formControlName="title"
             required type="text">

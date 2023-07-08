@@ -9,6 +9,7 @@ import {SubscribersService} from "../../services/subscribers.service";
 export class SubscriberComponent implements OnInit {
 
   subArrays!: Array<any>;
+  isEmpty: boolean = false;
 
   constructor(private subService: SubscribersService) {
 
@@ -17,6 +18,7 @@ export class SubscriberComponent implements OnInit {
   ngOnInit(): void {
     this.subService.loadData().subscribe(val => {
       this.subArrays = val;
+      this.isEmpty = val.length == 0;
     })
   }
 

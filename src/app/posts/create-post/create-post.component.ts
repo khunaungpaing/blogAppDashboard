@@ -19,6 +19,7 @@ export class CreatePostComponent implements OnInit {
   formStatus: string = 'Add New';
   docId: any;
 
+
   constructor(private categoryService: CategoriesService,
               private fb: FormBuilder,
               private postService: PostService,
@@ -29,7 +30,6 @@ export class CreatePostComponent implements OnInit {
       if (this.docId) {
         this.postService.findById(this.docId).subscribe(post => {
           this.post = post;
-          console.log(this.post);
           this.postForm.controls['title'].setValue(this.post.title);
           this.postForm.controls['permalink'].setValue(this.post.permalink);
           this.postForm.controls['excerpt'].setValue(this.post.excerpt);
@@ -95,5 +95,9 @@ export class CreatePostComponent implements OnInit {
     this.postService.uploadPost(this.selectedImage, postData, this.formStatus, this.docId);
     this.postForm.reset();
     this.img_url = '';
+  }
+
+  onKeyChange($event: any) {
+    this.postForm.controls['permalink'].setValue(this.postForm.value.title.replace(/\s+/g, '-'));
   }
 }

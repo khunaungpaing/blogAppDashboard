@@ -1,4 +1,4 @@
-import {effect, Injectable, signal} from '@angular/core';
+import {Injectable, signal} from '@angular/core';
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
@@ -8,11 +8,8 @@ import {Router} from "@angular/router";
 })
 export class AuthService {
   isAuthenticate = signal<boolean>(false);
+  userdata = signal<string>('');
 
-  public isEffectItem = effect(() => {
-    console.log('effect data', this.isAuthenticate());
-    return this.isAuthenticate();
-  })
 
   constructor(private fireAuth: AngularFireAuth, private toastr: ToastrService, private router: Router) {
   }
@@ -21,29 +18,38 @@ export class AuthService {
     return this.isAuthenticate();
   }
 
-  async login(email: any, password: any) {
-    await this.fireAuth.signInWithEmailAndPassword(email, password).then(logRef => {
+  login(email: any, password: any) {
+    this.fireAuth.signInWithEmailAndPassword(email, password).then(logRef => {
       this.toastr.success('login successfully...');
       this.loadUser();
       this.isAuthenticate.set(true);
-      this.router.navigate(['/']);
+      this.router.navigate(['/']).then(r => {
+      });
     }).catch(e => {
       this.toastr.warning(e);
     })
   }
 
-  async logout() {
+  logout() {
     this.fireAuth.signOut().then(() => {
       this.toastr.success('User log out successfully');
       localStorage.removeItem('user');
       this.isAuthenticate.set(false);
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login']).then(r => {
+      });
     })
   }
 
-  loadUser() {
+  private loadUser() {
     this.fireAuth.authState.subscribe(user => {
       localStorage.setItem('user', JSON.stringify(user));
+      this.userEmail(localStorage.getItem('user'));
     })
+  }
+
+  private userEmail(data: any) {
+    if (data) {
+      this.userdata.set(JSON.parse(data)?.email);
+    }
   }
 }

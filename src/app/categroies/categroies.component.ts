@@ -14,6 +14,7 @@ export class CategroiesComponent implements OnInit {
   categoryArray!: Array<any>;
   formStatus: string = 'Add';
   currentItem?: any;
+  isEmpty: boolean = true;
 
   constructor(private fb: FormBuilder, private categoryService: CategoriesService) {
     this.categoryForm = this.fb.group({
@@ -35,9 +36,9 @@ export class CategroiesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('hello from on init')
     this.categoryService.loadData().subscribe(val => {
       this.categoryArray = val;
+      this.isEmpty = val.length == 0;
     });
   }
 

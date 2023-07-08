@@ -34,7 +34,7 @@
         </th>
       </tr>
       </thead>
-      <tbody>
+      <tbody *ngIf="!isEmpty;else noData">
       <tr *ngFor="let sub of subArrays; let i = index;"
           class="bg-white border-b">
         <td class="px-6 py-4">
@@ -61,6 +61,13 @@
         </td>
       </tr>
       </tbody>
+      <ng-template #noData>
+        <tbody>
+        <tr>
+          <td class="text-xl text-center p-4" colspan="6"> No Data</td>
+        </tr>
+        </tbody>
+      </ng-template>
     </table>
   </div>
 </section>

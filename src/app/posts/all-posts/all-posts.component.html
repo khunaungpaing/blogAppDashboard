@@ -18,12 +18,12 @@
             </div>
           </th>
           <th class="px-6 py-3" scope="col">
-            <div class="w-52">
+            <div class="w-32">
               Post Image
             </div>
           </th>
           <th class="px-6 py-3" scope="col">
-            <div class="w-32">
+            <div class="w-52">
               Title
             </div>
           </th>
@@ -44,7 +44,7 @@
           </th>
         </tr>
         </thead>
-        <tbody>
+        <tbody *ngIf="!isEmpty;else noData">
         <tr
           *ngFor="let post of postArray; let i=index;"
           class="bg-white border-b">
@@ -96,6 +96,13 @@
           </td>
         </tr>
         </tbody>
+        <ng-template #noData>
+          <tbody>
+          <tr>
+            <td class="text-xl text-center p-4" colspan="6"> No Data</td>
+          </tr>
+          </tbody>
+        </ng-template>
       </table>
     </div>
   </section>

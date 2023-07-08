@@ -9,14 +9,15 @@ import {AuthService} from "../../services/auth.service";
 export class HeaderComponent implements OnInit {
 
   AuthStatus = signal<boolean>(false);
-  userEmail!: string;
+  userEmail = signal<string>('');
 
   constructor(private authService: AuthService) {
     this.AuthStatus = this.authService.isAuthenticate;
+    this.userEmail = this.authService.userdata;
   }
 
   ngOnInit(): void {
-    this.userEmail = JSON.parse(localStorage.getItem('user') ?? 'error').email;
+
   }
 
 
