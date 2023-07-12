@@ -161,7 +161,7 @@
     </section>
     <section>
       <angular-editor formControlName="content"></angular-editor>
-      <div *ngIf="fc['content'].errors?.['required']&&fc['content'].touched" class="flex text-sm text-red-500"
+      <div *ngIf="(fc['content'].errors?.['required']&&fc['content'].touched)" class="flex text-sm text-red-500"
            role="alert">
         <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20"
              xmlns="http://www.w3.org/2000/svg">

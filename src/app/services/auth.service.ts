@@ -12,6 +12,7 @@ export class AuthService {
 
 
   constructor(private fireAuth: AngularFireAuth, private toastr: ToastrService, private router: Router) {
+    this.isAuthenticate.set(JSON.parse(localStorage.getItem('user')!));
   }
 
   get showAuth(): boolean {
@@ -23,7 +24,7 @@ export class AuthService {
       this.toastr.success('login successfully...');
       this.loadUser();
       this.isAuthenticate.set(true);
-      this.router.navigate(['/']).then(r => {
+      this.router.navigate(['post']).then(r => {
       });
     }).catch(e => {
       this.toastr.warning(e);
@@ -35,7 +36,7 @@ export class AuthService {
       this.toastr.success('User log out successfully');
       localStorage.removeItem('user');
       this.isAuthenticate.set(false);
-      this.router.navigate(['/login']).then(r => {
+      this.router.navigate(['login']).then(r => {
       });
     })
   }
@@ -49,7 +50,7 @@ export class AuthService {
 
   private userEmail(data: any) {
     if (data) {
-      this.userdata.set(JSON.parse(data)?.email);
+      this.userdata.set(JSON.parse(data!)?.email);
     }
   }
 }

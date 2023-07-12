@@ -13,11 +13,15 @@ export class HeaderComponent implements OnInit {
 
   constructor(private authService: AuthService) {
     this.AuthStatus = this.authService.isAuthenticate;
-    this.userEmail = this.authService.userdata;
+    this.userEmail.set('')
   }
 
   ngOnInit(): void {
-
+    if (!JSON.parse(localStorage.getItem('user')!)) {
+      this.userEmail = this.authService.userdata;
+    } else {
+      this.userEmail.set(JSON.parse(localStorage.getItem('user')!)?.email);
+    }
   }
 
 

@@ -72,8 +72,6 @@ export class CreatePostComponent implements OnInit {
   }
 
   onSubmit() {
-
-    console.log(this.postForm.value)
     let postForm = this.postForm.value;
     let splitted = postForm.category.split('-');
 
